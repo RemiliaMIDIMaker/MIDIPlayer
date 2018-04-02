@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+
+# Other
+
+Debug
+Release
+x64/Debug
+x64/Release
+MIDIPlayer/Debug
+MIDIPlayer/Release
+MIDIPlayer/x64/Debug
+MIDIPlayer/x64/Release
+.vs
