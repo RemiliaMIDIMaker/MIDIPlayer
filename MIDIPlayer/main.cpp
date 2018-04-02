@@ -26,6 +26,10 @@ public:
 		assert(channel <= 0xf);
 		midiOutShortMsg(midi_device, ((pitch * 0x100) | (channel + 0x80)));
 	}
+	void ChangePatch(uint8_t patch, uint8_t channel = 0) {
+		assert(patch <= 0x7f);
+		midiOutShortMsg(midi_device, ((patch * 0x100) | (channel + 0xc0)));
+	}
 
 	void Sleep(uint32_t det) {
 		::Sleep(det);
@@ -38,6 +42,8 @@ private:
 int main(int argc, const char *argv[])
 {
 	MIDIPlayer player;
+
+	player.ChangePatch(0);
 
 	player.PlayPitch(0x3c, 100);
 	player.Sleep(1000);
