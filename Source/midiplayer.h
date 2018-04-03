@@ -18,13 +18,16 @@ namespace MIDIPlayer
 		explicit Patch(uint8_t data = 0) : data(data) { assert(data <= 0x7f); }
 		uint8_t data;
 	};
-	struct Note {
-		explicit Note(uint8_t data = 0) : data(data) {
+	struct NoteBase { // 7 notes
+		explicit NoteBase(uint8_t data = 0) : data(data) {
 			if ('A' <= data && data <= 'G') {
 				if (data < 'C')
 					this->data = (data - 'A') + 6;
 				else
 					this->data = (data - 'C') + 1;
+			}
+			else if ('1' <= data && data <= '7') {
+				this->data = data - '1' + 1;
 			}
 			else if (!(1 <= data && data <= 7)) {
 				assert(false);
@@ -45,22 +48,36 @@ namespace MIDIPlayer
 		}
 		uint8_t data;
 	};
-	struct Octave {
-		explicit Octave(uint8_t data = 0) : data(data) { assert(-1 <= data && data <= 9); }
+	struct Note { // 12 + 2 notes (0 1 ~ 12 13) bC(-B) C #C(bD) D #D(bE) E(bF) F(#E) #F(bG) G #G(bA) A #A(bB) B #B(+C)
+		explicit Note(uint8_t data) /* 0 ~ 11 : C ~ B */ : data(data) { assert(data < 12); this->data += 1; }
+		explicit Note(NoteBase notebase) : Note(notebase, KeySignature()) {}
+		explicit Note(NoteBase notebase, KeySignature keysignature) {
+			static const uint8_t table[] = { 1, 3, 5, 6, 8, 10, 12 };
+			this->data = table[notebase.data - 1] + keysignature.data;
+		}
+		explicit Note(const char *word) { // X bX #X
+			if (word[0] == 'b' || word[0] == '#')
+				this->Note::Note(NoteBase(word[1]), KeySignature(word[0]));
+			else
+				this->Note::Note(NoteBase(word[0]));
+		}
 		uint8_t data;
+	};
+	struct Octave {
+		static constexpr int8_t default_octave = 4;
+		explicit Octave(int8_t data = default_octave) : data(data) { assert(-1 <= data && data <= 9); }
+		int8_t data;
 	};
 	struct Pitch {
 		explicit Pitch(uint8_t data) : data(data) { assert(data <= 0x7f); }
-		Pitch(Note note) : Pitch(note, KeySignature(0), Octave(4)) {}
-		Pitch(Note note, KeySignature keysignature, Octave octave) {
+		Pitch(Note note) : Pitch(note, Octave()) {}
+		Pitch(Note note, Octave octave) {
 			// Middle C : 0x3c
-			// C C# D D# E F F# G G# A A# B : 0xc
-			// 1 1# 2 2# 3 4 4# 5 5# 6 6# 7
-			static const uint8_t table[] = { 0x0c, 0x0e, 0x10, 0x11, 0x13, 0x15, 0x17 };
-			this->data = table[note.data - 1] + keysignature.data + octave.data * 0xc;
+			// C #C D #D E F #F G #G A #A B : 0xc
+			// 1 #1 2 #2 3 4 #4 5 #5 6 #6 7
+			this->data = note.data + 0xc - 1 + octave.data * 0xc;
+			assert(this->data <= 0x7f);
 		}
-		Pitch(Note note, KeySignature keysignature) : Pitch(note, keysignature, Octave(4)) {}
-		Pitch(Note note, Octave octave) : Pitch(note, KeySignature(0), octave) {}
 		uint8_t data;
 	};
 	struct DeTime {

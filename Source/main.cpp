@@ -12,31 +12,31 @@ int main(int argc, const char *argv[])
 
 	std::thread t1([&]() {
 		auto playerc = player.Create(Track(0));
-		playerc.PlayPitch(Note('C'), DeTime(500));
-		playerc.PlayPitch(Note('C'), DeTime(500));
-		playerc.PlayPitch(Note(3), DeTime(500));
-		playerc.PlayPitch(Note(5), DeTime(500));
-		playerc.PlayPitch(Note(5), DeTime(1000));
+		playerc.PlayPitch(Note("C"), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase('C')), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase(3)), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase(5)), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase(5)), DeTime(1000));
 
-		Pitch vecs[] { Note(1), Note(3), Note(5) };
+		Pitch vecs[] { Note(NoteBase(1)), Note(NoteBase(3)), Note(NoteBase(5)) };
 		//playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
-		playerc.PlayPitch(Note(5), DeTime(500));
-		playerc.PlayPitch(Note(5), DeTime(1000));
-		playerc.PlayPitch(Note(3), DeTime(500));
-		playerc.PlayPitch(Note(3), DeTime(1000));
+		playerc.PlayPitch(Note(NoteBase(5)), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase(5)), DeTime(1000));
+		playerc.PlayPitch(Note(NoteBase(3)), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase(3)), DeTime(1000));
 		//playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
 
-		playerc.PlayPitch(Note(1), DeTime(500));
-		playerc.PlayPitch(Note(1), DeTime(500));
-		playerc.PlayPitch(Note(3), DeTime(500));
-		playerc.PlayPitch(Note(5), DeTime(500));
-		playerc.PlayPitch(Note(5), DeTime(1000));
+		playerc.PlayPitch(Note(NoteBase(1)), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase(1)), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase(3)), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase(5)), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase(5)), DeTime(1000));
 
 		//playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
-		playerc.PlayPitch(Note(5), DeTime(500));
-		playerc.PlayPitch(Note(5), DeTime(1000));
-		playerc.PlayPitch(Note(4), DeTime(500));
-		playerc.PlayPitch(Note(4), DeTime(1000));
+		playerc.PlayPitch(Note(NoteBase(5)), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase(5)), DeTime(1000));
+		playerc.PlayPitch(Note(NoteBase(4)), DeTime(500));
+		playerc.PlayPitch(Note(NoteBase(4)), DeTime(1000));
 
 		play_end = true;
 		});
@@ -46,7 +46,7 @@ int main(int argc, const char *argv[])
 		playerc.Sleep(DeTime(500));
 		
 		while (!play_end) {
-			playerc.PlayPitch(Pitch(Note(5), Octave(3)), DeTime(500));
+			playerc.PlayPitch(Pitch(Note(NoteBase(5)), Octave(3)), DeTime(500));
 		}
 		});
 
