@@ -1,0 +1,242 @@
+标准GM乐器音色列表及大概讲解
+钢琴
+0 ACCOUSTIC GRAND PIANO 大钢琴（就是一般我们见到的那种）
+    音色比较浑厚，可以用于古典乐曲，进行曲，爵士乐等比较正规的（流行乐也可以的），在钢琴方面，
+    各种声卡做的都还不错的，可以作为和弦，也可以作为主音
+1 BRIGHT ACCOUSTIC PIANO 明亮的钢琴
+    声音比较尖比较脆，不适合正规乐曲，可用于流行乐，电子乐等，多做主音
+2 ELECTRIC GRAND PIANO 电钢琴
+    声音比BRIGHT ACCOUSTIC PIANO柔和一点，使用同上
+3 HONKY-TONK PIANO 酒吧钢琴
+    声音很柔和，有点FLANGER的感觉，很重的电子倾向，用于流行乐，电子乐
+4 RHODES PIANO 柔和的电钢琴
+    已经不像钢琴了，有嘟的声音，明显电子，可做和弦用，做和弦时可用于流行，电子甚至是爵士，有
+    很好的效果，但是如果做主音就听不大清了。
+5 CHORUSED PIANO 加了合唱效果的电钢琴
+    声音比电钢琴闷一点，一听就是电子味道的
+6 HARPSICHORD 羽管键琴（拨弦古钢琴）
+    可用于古典歌曲，教堂音乐，乡村音乐，声音有点扁，有点难听，但是做分解和弦的时候还不错的
+7 CLAVICHORD 科拉维科特琴（击弦古钢琴）
+    音色也不是很好听，用法和HARPSICHORD相似
+ 
+色彩打击乐器
+8 CELESTA 钢片琴
+    叮咚的声音，各种场合都有可能用到，加长时值无效
+9 GLOCKENSPIEL 钟琴
+10 MUSIC BOX 八音盒
+    经常用于某些流行歌曲的开头，可用于电子乐，古典乐等，制造一种音很高的天籁之音的效果，可以提
+    高八度使用，加长时值无效
+11 VIBRAPHONE 颤音琴
+    和MUSICBOX类似，也可提高八度用
+12 MARIMBA 马林巴
+    可用作和弦，不适用庄严的歌
+13 XYLOPHONE 木琴
+    多用于桑巴等爵士乐曲，声音脆，短，加长时值无效
+14 TUBULAR BELLS 管钟
+    一般作为音效出现
+15 DUCLIMER 大扬琴
+   这个不用说了，中国古典乐器
+ 
+风琴
+16 HAMMOND ORGAN 击杆风琴
+    音色较亮，适用于古典音乐，特别是教堂音乐，格兰蒂亚2可以见到
+17 PERCUSSIVE ORGAN 打击式风琴
+    音色闷一点，比较忧伤，适用于古典音乐，特别是教堂音乐
+18 ROCK ORGAN 摇滚风琴
+    顾名思义，多做主音，使用的时候经常用爬音阶的方式，就是用大拇指上滑或者下滑，记得用32分音符
+   （尽量小一点），然后按照半音慢慢排列下来
+19 CHURCH ORGAN 教堂风琴
+    还要说吗？音色比较直一点，不带强烈感情色彩
+20 REED ORGAN 簧管风琴
+    与其他风琴不同的是它是吹出来的，用于古典乐
+21 ACCORDIAN 手风琴
+    不用说了吧，有明显个性色彩的乐器
+22 HARMONICA 口琴
+23 TANGO ACCORDIAN 探戈手风琴
+    多用于探戈舞曲
+ 
+吉他
+24 ACOUSTIC GUITAR（NYLON）尼龙弦吉他（古典吉他）
+    用于古典乐，也会用于流行歌曲做伴奏或者有一段SOLO
+25 ACOUSTIC GUITAR（STEEL） 钢弦吉他
+    多用于乐队演奏，做节奏吉他
+26 ELECTRIC GUITAR（JAZZ） 爵士电吉他
+    爵士，流行都可用的
+27 ELECTRIC GUITAR（CLEAN） 清音电吉他
+    多用做分解和弦
+28 ELECTRIC GUITAR（MUTED） 闷音电吉他
+    产生闷音效果
+29 OVERDRIVEN GUITAR 加驱动效果的电吉他
+30 DISTORTION GUITAR 加失真效果的电吉他
+    这两种都带失真效果，主要用于ROCK
+31 GUITAR HARMONICS 吉他和音（可以做泛音）
+    产生高8度的音，做泛音有比较好的效果，和失真吉他一起用
+ 
+贝斯
+32 ACOUSTIC BASS 大贝斯（声学贝斯）
+    用于古典，爵士
+33 ELECTRIC BASS（FINGER） 电贝斯（指弹）
+34 ELECTRIC BASS（PICK） 电贝斯（拨片）
+    这两种用于流行，摇滚等各种音乐（除了古典乐和独奏乐，BASS是不能少的），后者是用拨片弹的，脆
+    一点，前者用手弹的，实一点
+35 FRETLESS BASS 无品贝斯
+    一种像小提琴的贝斯（不是说长的像啊，只是说它不标注品位），没有标注品位，所以音听起来不是很
+    准，但有一定的效果
+36 SLAP BASS 1 勾打贝斯1
+37 SLAP BASS 2 勾打贝斯2
+    这两种适用大拇指勾打贝斯的弦产生的，多用于FUNK
+38 SYNTH BASS 1 电子合成贝斯1
+39 SYNTH BASS 2 电子合成贝斯2
+    多用于电子乐
+ 
+弦乐
+40 VIOLIN 小提琴
+41 VIOLA 中提琴
+42 CELLO 大提琴
+43 CONTRABASS 低音提琴
+    四种提琴音域依次往下降，CONTRABASS在古典乐中相当于BASS的作用
+    VIOLIN,VIOLA可以独奏，全部都可以作为和弦（用16分音符）产生一种拉弦的效果
+44 TREMOLO STRINGS 弦乐群颤音音色
+    有点像小提琴中的TR~~~~~（脆儿）所有弦乐器在半音范围内颤抖
+45 PIZZICATO STRINGS 弦乐琴拨弦音色
+    多用于古典乐，NEWAGE，所有弦乐器一起拨弦的声音
+46 ORCHESTRAL HARP 竖琴
+    用上下行的话可以加强乐曲气势,音色非常好听
+47 TIMPANI 定音鼓
+    加强低音效果和气势，用的时候音不用太准的，最好不要使用它的高音
+
+合奏/合唱
+48 STRING ENSEMBLE 1 弦乐合奏音色1
+    声音较钢硬，有气势的
+49 STRING ENSEMBLE 2 弦乐合奏音色2
+    声音较柔和，声音会延迟到达最大音量
+    都用于古典乐，流行乐做和弦或者做小提琴等乐器的铺垫音
+50 SYNTH STRINGS 1 合成弦乐合奏音色1
+51 SYNTH STRINGS 2 合成弦乐合奏音色2
+    用于电子乐流行乐做和弦
+52 CHOIR AAHS 人声合唱“啊”
+53 VOICE OOHS 人声“嘟”
+54 SYNTH VOICE 合成人声
+    可以做乐曲主旋律或者和声的旋律
+55 ORCHESTRA HIT 管弦乐敲击齐奏
+    很强的气势，每次最好只用一个音，加大它的力度就可以了
+ 
+铜管
+56 TRUMPET 小号
+    高音乐器，声音刚健挺拔
+57 TROMBONE 长号
+    可以使用滑音，适合粗犷雄壮的曲调
+58 TUBA 大号
+    低音乐器
+59 MUTED TRUMPET 加弱音器的小号
+60 FRENCH HORN 法国号（圆号）
+    音色柔和，常与木管乐器一起使用
+61 BRASS SECTION 铜管组（铜管乐器合奏）
+62 SYNTH BRASS 1 合成铜管音色 1
+63 SYNTH BRASS 2 合成铜管音色 2
+    铜管组要配合使用，一般都会几个同时出现
+ 
+簧管
+64 SOPRANO SAX 高音萨克斯
+65 ALTO SAX 次中音萨克斯
+    可用做主旋律，做主音的时候可以用滑音
+66 TENOR SAX 中音萨克斯
+67 BARITONE SAX 低音萨克斯
+    SAX本来就是一种做主旋律的乐器，不能做和弦
+68 OBOE 双簧管
+69 ENGLISH HORN 英国管
+70 BASSOON 巴松（大管）
+71 CLARINET 单簧管（黑管）
+
+笛
+72 PICCOLO 短笛
+    尖锐的声音
+73 FLUTE 长笛
+    声音柔和，做主音
+74 RECORDER 竖笛
+    TITANIC的主旋律可以用这个来做
+75 PAN FLUTE 排箫
+    可以听到明显的呼吸声
+76 BOTTLE BLOW 吹瓶声
+77 SHAKUHACHI 日本尺八
+    明显的民族乐器，非常好听，只是GM和XG都做的不大好
+78 WHISTLE 口哨声
+79 OCARINA 奥卡雷那
+ 
+合成主音
+80 LEAD 1 （SQUARE） 合成主音1（方波）
+81 LEAD 2 （SAWTOOTH） 合成主音2（锯齿波）
+82 LEAD 3 （CALIOPE LEAD） 合成主音3（模拟一种吹的乐器，类似排箫）
+83 LEAD 4 （CHIFF LEAD） 合成主音4（模拟一种吹的乐器）
+    上面几个多用于电子乐主音
+84 LEAD 5 （CHARANG） 合成主音5（模拟电子失真乐器，类似失真电吉他）
+    可以当作电吉他使用
+85 LEAD 6 （VOICE） 合成主音6（人声）
+86 LEAD 7 （FIFTHS） 合成主音7（五度音）
+    生成一个五度音1，5不怎么用的
+87 LEAD 8 （BASS+LEAD） 合成主音8（贝斯加主音）
+    是个合成的音色，里面有BASS音色，只适合节奏比较整齐的歌
+ 
+合成音色
+88 PAD 1 （NEW AGE） 合成音色1（新世纪）
+89 PAD 2 （WARM） 合成音色2（温暖）
+    多做和弦
+90 PAD 3 （POLYSYNTH） 合成音色3（多合成）
+    多做主音
+91 PAD 4 （CHOIR） 合成音色4（合唱）
+    多做主旋律或者人的和声
+92 PAD 5 （BOWED） 合成音色5（弓弦）
+    把它和BRIGHT ACCOUSTIC PIANO和STEEL GUITAR一起用会有想不到的效果
+93 PAD 6 （METALLIC） 合成音色6（金属声）
+94 PAD 7 （HALO） 合成音色7（光环）
+95 PAD 8 （SWEEP） 合成音色8（风吹）
+    它不提供风吹的音效，只是声音有点像风吹，有音高的
+ 
+合成效果
+96 FX 1 （RAIN） 合成效果1（雨声）
+97 FX 2 （SOUNDTRACK） 合成效果2（音轨）
+98 FX 3 （CRYSTAL） 合成效果3（水晶）
+99 FX 4 （ATMOSPHERE） 合成效果4（大气）
+100 FX 5 （BRIGHTNESS） 合成效果5（明亮）
+    可以做分解和弦，声音很好听的，这个音色声卡不同会有很大区别
+101 FX 6 （GLOBINS） 合成效果6（鬼怪）
+    GM,XG都做的不太好，其实这个音效很好的
+102 FX 7 （ECHOES） 合成效果7（回声）
+103 FX 8 （SCI-FI ） 合成效果8（科幻）
+ 
+民间乐器
+104 SITAR 西塔尔（印度）
+105 BANJO 班卓琴（美洲）
+    乡村音乐可以使用的
+106 SHAMISEN 三昧线（日本）
+    忍者里面有这个乐器
+107 KOTO 十三弦筝（日本）
+    可以当作古筝使用（独家试唱）
+108 KALIMBA 卡林巴（非洲）
+    适合SAMBA等爵士乐
+109 BAGPIPE 风笛（苏格兰）
+110 FIDDLE 民族提琴
+    多用于乡村音乐
+111 SHANAI 山奈
+ 
+打击乐器
+112 TINKLE BELL 叮当铃
+113 AGOGO 摇摆舞铃
+114 STEEL DRUMS 钢鼓
+115 WOOD BLOCK 木鱼
+116 TAIKO DRUM 太鼓
+117 MELODIC DRUM 通通鼓
+118 SYNTH DRUM 合成鼓
+    三种鼓都有音高的，不常用
+119 REVERSE CYMBAL 铜钹
+    这个乐器只能延续大概三拍，（120的速度）产生一种渐强的连续敲钹效果
+ 
+声音效果
+120 GUITAR FRET NOISE 吉他换把杂音
+121 BREATH NOISE 呼吸声
+122 SEASHORE 海浪声
+123 BIRD SWEET 鸟鸣
+124 TELEPHONE RING 电话铃
+125 HELICOPTER 直升机
+126 APPLAUSE 鼓掌声
+127 GUNSHOT 枪击声
