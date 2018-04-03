@@ -43,14 +43,8 @@ int main(int argc, const char *argv[])
 		auto playerc = player.Create(Channel(1));
 		playerc.Sleep(DeTime(500));
 		
-		while (true) {
-			if (play_end) break;
+		while (!play_end) {
 			playerc.PlayPitch(Pitch(PitchBase(5), Scale(3)), DeTime(500));
-			if (play_end) break;
-			playerc.PlayPitch(Pitch(PitchBase(5), Scale(3)), DeTime(500));
-			if (play_end) break;
-			playerc.PlayPitch(Pitch(PitchBase(5), Scale(3)), DeTime(1000));
-			if (play_end) break;
 		}
 		});
 
