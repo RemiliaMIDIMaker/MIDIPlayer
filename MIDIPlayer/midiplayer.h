@@ -1,8 +1,7 @@
 #pragma once
-#include "stdafx.h"
 #include <cstdint>
 #include <cassert>
-#include <cstdio>
+#include <memory>
 
 namespace MIDIPlayer
 {
@@ -49,7 +48,18 @@ namespace MIDIPlayer
 	class Player
 	{
 	public:
-		using MIDIDevice = HMIDIOUT;
+		class MIDIDevice {
+		public:
+			MIDIDevice() : ref(nullptr, close) { open(data); }
+
+			void*& get();
+
+		private:
+			static void open(void* &data);
+			static void close(void *data);
+			void *data;
+			std::shared_ptr<void> ref;
+		};
 		class ChannelPlayer
 		{
 		public:
@@ -113,16 +123,8 @@ namespace MIDIPlayer
 		};
 
 	public:
-		Player() {
-			if (midiOutOpen(&midi_device, 0, 0, 0, CALLBACK_NULL)) {
-				midi_device = nullptr;
-				printf("There is an error opening the default MIDI out device!\n");
-			}
-		}
-		~Player() {
-			if (midi_device)
-				midiOutClose(midi_device);
-		}
+		Player() = default;
+		Player(const Player &) = default;
 
 		void PlayPitch(Pitch pitch, Volume volume, Channel channel) {
 			PlayPitch(midi_device, pitch, volume, channel);
@@ -134,9 +136,7 @@ namespace MIDIPlayer
 			ChangePatch(midi_device, patch, channel);
 		}
 
-		void Sleep(DeTime detime) {
-			::Sleep(detime.data);
-		}
+		void Sleep(DeTime detime);
 
 		ChannelPlayer Create(Channel channel) {
 			return ChannelPlayer(*this, channel, Volume(0x7f));
@@ -157,15 +157,9 @@ namespace MIDIPlayer
 		}
 
 	public:
-		static void PlayPitch(MIDIDevice midi_device, Pitch pitch, Volume volume, Channel channel) {
-			midiOutShortMsg(midi_device, ((volume.data * 0x10000) | (pitch.data * 0x100) | (channel.data + 0x90)));
-		}
-		static void ClosePitch(MIDIDevice midi_device, Pitch pitch, Channel channel) {
-			midiOutShortMsg(midi_device, ((pitch.data * 0x100) | (channel.data + 0x80)));
-		}
-		static void ChangePatch(MIDIDevice midi_device, Patch patch, Channel channel) {
-			midiOutShortMsg(midi_device, ((patch.data * 0x100) | (channel.data + 0xc0)));
-		}
+		static void PlayPitch(MIDIDevice midi_device, Pitch pitch, Volume volume, Channel channel);
+		static void ClosePitch(MIDIDevice midi_device, Pitch pitch, Channel channel);
+		static void ChangePatch(MIDIDevice midi_device, Patch patch, Channel channel);
 
 	private:
 		MIDIDevice midi_device;
