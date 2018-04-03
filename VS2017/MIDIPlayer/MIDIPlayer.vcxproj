@@ -18,6 +18,17 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\Source\midiplayer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\midiplayer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Source\Patch.txt" />
+    <Text Include="..\..\Source\Pitch.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{96A564A7-0AEF-4A23-B1BE-8F5BA08B01BE}</ProjectGuid>
@@ -146,17 +157,6 @@
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="midiplayer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="midiplayer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Patch.txt" />
-    <Text Include="Pitch.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

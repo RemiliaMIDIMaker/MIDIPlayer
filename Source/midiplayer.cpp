@@ -2,7 +2,9 @@
 #include <Windows.h>
 #include <Mmsystem.h>
 #include <cstdio>
-#pragma comment(lib, "Winmm.lib")
+#ifdef _MSC_VER
+#	pragma comment(lib, "Winmm.lib")
+#endif
 
 namespace MIDIPlayer
 {

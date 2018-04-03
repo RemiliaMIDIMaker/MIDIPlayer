@@ -15,23 +15,23 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="..\..\Source\midiplayer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="midiplayer.cpp">
+    <ClCompile Include="..\..\Source\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="midiplayer.h">
+    <ClInclude Include="..\..\Source\midiplayer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Pitch.txt">
+    <Text Include="..\..\Source\Patch.txt">
       <Filter>资源文件</Filter>
     </Text>
-    <Text Include="Patch.txt">
+    <Text Include="..\..\Source\Pitch.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>
