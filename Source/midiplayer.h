@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <cassert>
 #include <memory>
+#include <cctype>
 
 namespace MIDIPlayer
 {
@@ -9,35 +10,57 @@ namespace MIDIPlayer
 		explicit Volume(uint8_t data = 0) : data(data) { assert(data <= 0x7f); }
 		uint8_t data;
 	};
-	struct Channel {
-		explicit Channel(uint8_t data = 0) : data(data) { assert(data <= 0xf); }
+	struct Track {
+		explicit Track(uint8_t data = 0) : data(data) { assert(data <= 0xf); }
 		uint8_t data;
 	};
 	struct Patch {
 		explicit Patch(uint8_t data = 0) : data(data) { assert(data <= 0x7f); }
 		uint8_t data;
 	};
-	struct PitchBase {
-		explicit PitchBase(uint8_t data = 0) : data(data) { assert(1<= data && data <= 7); }
+	struct Note {
+		explicit Note(uint8_t data = 0) : data(data) {
+			if ('A' <= data && data <= 'G') {
+				if (data < 'C')
+					this->data = (data - 'A') + 6;
+				else
+					this->data = (data - 'C') + 1;
+			}
+			else if (!(1 <= data && data <= 7)) {
+				assert(false);
+			}
+		}
 		uint8_t data;
 	};
-	struct Scale {
-		explicit Scale(uint8_t data = 0) : data(data) { assert(-1 <= data && data <= 9); }
+	struct KeySignature {
+		explicit KeySignature(uint8_t data = 0) : data(data) {
+			if (data == '#')
+				this->data = +1;
+			else if (data == 'b')
+				this->data = -1;
+			else if (data == 0)
+				this->data = 0;
+			else
+				assert(false);
+		}
+		uint8_t data;
+	};
+	struct Octave {
+		explicit Octave(uint8_t data = 0) : data(data) { assert(-1 <= data && data <= 9); }
 		uint8_t data;
 	};
 	struct Pitch {
 		explicit Pitch(uint8_t data) : data(data) { assert(data <= 0x7f); }
-		Pitch(PitchBase base) : Pitch(base, false, Scale(4)) {}
-		Pitch(PitchBase base, bool rise, Scale scale) {
-			assert(!rise || !(base.data == 3 || base.data == 7));
-			// C ~ B 1 ~ 7 -> 0x3c ~ 0x47
+		Pitch(Note note) : Pitch(note, KeySignature(0), Octave(4)) {}
+		Pitch(Note note, KeySignature keysignature, Octave octave) {
+			// Middle C : 0x3c
 			// C C# D D# E F F# G G# A A# B : 0xc
 			// 1 1# 2 2# 3 4 4# 5 5# 6 6# 7
 			static const uint8_t table[] = { 0x0c, 0x0e, 0x10, 0x11, 0x13, 0x15, 0x17 };
-			this->data = table[base.data - 1] + (rise ? 1 : 0) + scale.data * 0xc;
+			this->data = table[note.data - 1] + keysignature.data + octave.data * 0xc;
 		}
-		Pitch(PitchBase base, bool rise) : Pitch(base, rise, Scale(4)) {}
-		Pitch(PitchBase base, Scale scale) : Pitch(base, false, scale) {}
+		Pitch(Note note, KeySignature keysignature) : Pitch(note, keysignature, Octave(4)) {}
+		Pitch(Note note, Octave octave) : Pitch(note, KeySignature(0), octave) {}
 		uint8_t data;
 	};
 	struct DeTime {
@@ -60,20 +83,20 @@ namespace MIDIPlayer
 			void *data;
 			std::shared_ptr<void> ref;
 		};
-		class ChannelPlayer
+		class TrackPlayer
 		{
 		public:
-			ChannelPlayer(Player &player, Channel channel, Volume volume)
-				: player(player), channel(channel), volume(volume) {}
+			TrackPlayer(Player &player, Track track, Volume volume)
+				: player(player), track(track), volume(volume) {}
 
 			void SetVolume(Volume volume) {
 				this->volume = volume;
 			}
 			void PlayPitch(Pitch pitch) {
-				player.PlayPitch(pitch, volume, channel);
+				player.PlayPitch(pitch, volume, track);
 			}
 			void PlayPitch(Pitch pitch, Volume volume) {
-				player.PlayPitch(pitch, volume, channel);
+				player.PlayPitch(pitch, volume, track);
 			}
 			void PlayPitch(Pitch pitch, DeTime detime) {
 				PlayPitch(pitch);
@@ -106,10 +129,10 @@ namespace MIDIPlayer
 			}
 
 			void ClosePitch(Pitch pitch) {
-				player.ClosePitch(pitch, channel);
+				player.ClosePitch(pitch, track);
 			}
 			void ChangePatch(Patch patch) {
-				player.ChangePatch(patch, channel);
+				player.ChangePatch(patch, track);
 			}
 
 			void Sleep(DeTime detime) {
@@ -118,7 +141,7 @@ namespace MIDIPlayer
 
 		private:
 			Player & player;
-			Channel channel;
+			Track track;
 			Volume volume;
 		};
 
@@ -126,40 +149,40 @@ namespace MIDIPlayer
 		Player() = default;
 		Player(const Player &) = default;
 
-		void PlayPitch(Pitch pitch, Volume volume, Channel channel) {
-			PlayPitch(midi_device, pitch, volume, channel);
+		void PlayPitch(Pitch pitch, Volume volume, Track track) {
+			PlayPitch(midi_device, pitch, volume, track);
 		}
-		void ClosePitch(Pitch pitch, Channel channel) {
-			ClosePitch(midi_device, pitch, channel);
+		void ClosePitch(Pitch pitch, Track track) {
+			ClosePitch(midi_device, pitch, track);
 		}
-		void ChangePatch(Patch patch, Channel channel) {
-			ChangePatch(midi_device, patch, channel);
+		void ChangePatch(Patch patch, Track track) {
+			ChangePatch(midi_device, patch, track);
 		}
 
 		void Sleep(DeTime detime);
 
-		ChannelPlayer Create(Channel channel) {
-			return ChannelPlayer(*this, channel, Volume(0x7f));
+		TrackPlayer Create(Track track) {
+			return TrackPlayer(*this, track, Volume(0x7f));
 		}
-		ChannelPlayer Create(Channel channel, Volume volume) {
-			return ChannelPlayer(*this, channel, volume);
+		TrackPlayer Create(Track track, Volume volume) {
+			return TrackPlayer(*this, track, volume);
 		}
-		ChannelPlayer Create(Channel channel, Volume volume, Patch patch) {
-			ChannelPlayer pc(*this, channel, volume);
+		TrackPlayer Create(Track track, Volume volume, Patch patch) {
+			TrackPlayer pc(*this, track, volume);
 			pc.ChangePatch(patch);
 			return pc;
 		}
-		ChannelPlayer Create(Channel channel, Patch patch) {
-			return Create(channel, Volume(0x7f), patch);
+		TrackPlayer Create(Track track, Patch patch) {
+			return Create(track, Volume(0x7f), patch);
 		}
-		ChannelPlayer Create(Channel channel, Patch patch, Volume volume) {
-			return Create(channel, volume, patch);
+		TrackPlayer Create(Track track, Patch patch, Volume volume) {
+			return Create(track, volume, patch);
 		}
 
 	public:
-		static void PlayPitch(MIDIDevice midi_device, Pitch pitch, Volume volume, Channel channel);
-		static void ClosePitch(MIDIDevice midi_device, Pitch pitch, Channel channel);
-		static void ChangePatch(MIDIDevice midi_device, Patch patch, Channel channel);
+		static void PlayPitch(MIDIDevice midi_device, Pitch pitch, Volume volume, Track track);
+		static void ClosePitch(MIDIDevice midi_device, Pitch pitch, Track track);
+		static void ChangePatch(MIDIDevice midi_device, Patch patch, Track track);
 
 	private:
 		MIDIDevice midi_device;

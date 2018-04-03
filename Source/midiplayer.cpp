@@ -27,14 +27,14 @@ namespace MIDIPlayer
 		return data;
 	}
 
-	void Player::PlayPitch(MIDIDevice midi_device, Pitch pitch, Volume volume, Channel channel) {
-		midiOutShortMsg(getMIDIDevice(midi_device), ((volume.data * 0x10000) | (pitch.data * 0x100) | (channel.data + 0x90)));
+	void Player::PlayPitch(MIDIDevice midi_device, Pitch pitch, Volume volume, Track track) {
+		midiOutShortMsg(getMIDIDevice(midi_device), ((volume.data * 0x10000) | (pitch.data * 0x100) | (track.data + 0x90)));
 	}
-	void Player::ClosePitch(MIDIDevice midi_device, Pitch pitch, Channel channel) {
-		midiOutShortMsg(getMIDIDevice(midi_device), ((pitch.data * 0x100) | (channel.data + 0x80)));
+	void Player::ClosePitch(MIDIDevice midi_device, Pitch pitch, Track track) {
+		midiOutShortMsg(getMIDIDevice(midi_device), ((pitch.data * 0x100) | (track.data + 0x80)));
 	}
-	void Player::ChangePatch(MIDIDevice midi_device, Patch patch, Channel channel) {
-		midiOutShortMsg(getMIDIDevice(midi_device), ((patch.data * 0x100) | (channel.data + 0xc0)));
+	void Player::ChangePatch(MIDIDevice midi_device, Patch patch, Track track) {
+		midiOutShortMsg(getMIDIDevice(midi_device), ((patch.data * 0x100) | (track.data + 0xc0)));
 	}
 	void Player::Sleep(DeTime detime) {
 		::Sleep(detime.data);

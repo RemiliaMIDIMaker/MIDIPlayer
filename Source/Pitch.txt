@@ -1,4 +1,4 @@
-Hex Scale Pitch
+Hex Octave Note
 00 -1 C
 01 -1 C#
 02 -1 D

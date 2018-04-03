@@ -11,39 +11,42 @@ int main(int argc, const char *argv[])
 	bool play_end = false;
 
 	std::thread t1([&]() {
-		auto playerc = player.Create(Channel(0));
-		playerc.PlayPitch(PitchBase(1), DeTime(500));
-		playerc.PlayPitch(PitchBase(1), DeTime(500));
-		playerc.PlayPitch(PitchBase(3), DeTime(500));
-		playerc.PlayPitch(PitchBase(5), DeTime(500));
+		auto playerc = player.Create(Track(0));
+		playerc.PlayPitch(Note('C'), DeTime(500));
+		playerc.PlayPitch(Note('C'), DeTime(500));
+		playerc.PlayPitch(Note(3), DeTime(500));
+		playerc.PlayPitch(Note(5), DeTime(500));
+		playerc.PlayPitch(Note(5), DeTime(1000));
 
-		Pitch vecs[] { PitchBase(1), PitchBase(3), PitchBase(5) };
-		playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
-		playerc.PlayPitch(PitchBase(5), DeTime(500));
-		playerc.PlayPitch(PitchBase(5), DeTime(1000));
-		playerc.PlayPitch(PitchBase(3), DeTime(500));
-		playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
+		Pitch vecs[] { Note(1), Note(3), Note(5) };
+		//playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
+		playerc.PlayPitch(Note(5), DeTime(500));
+		playerc.PlayPitch(Note(5), DeTime(1000));
+		playerc.PlayPitch(Note(3), DeTime(500));
+		playerc.PlayPitch(Note(3), DeTime(1000));
+		//playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
 
-		playerc.PlayPitch(PitchBase(1), DeTime(500));
-		playerc.PlayPitch(PitchBase(1), DeTime(500));
-		playerc.PlayPitch(PitchBase(3), DeTime(500));
-		playerc.PlayPitch(PitchBase(5), DeTime(500));
+		playerc.PlayPitch(Note(1), DeTime(500));
+		playerc.PlayPitch(Note(1), DeTime(500));
+		playerc.PlayPitch(Note(3), DeTime(500));
+		playerc.PlayPitch(Note(5), DeTime(500));
+		playerc.PlayPitch(Note(5), DeTime(1000));
 
-		playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
-		playerc.PlayPitch(PitchBase(5), DeTime(500));
-		playerc.PlayPitch(PitchBase(5), DeTime(1000));
-		playerc.PlayPitch(PitchBase(4), DeTime(500));
-		playerc.PlayPitch(PitchBase(4), DeTime(1000));
+		//playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
+		playerc.PlayPitch(Note(5), DeTime(500));
+		playerc.PlayPitch(Note(5), DeTime(1000));
+		playerc.PlayPitch(Note(4), DeTime(500));
+		playerc.PlayPitch(Note(4), DeTime(1000));
 
 		play_end = true;
 		});
 
 	std::thread t2([&]() {
-		auto playerc = player.Create(Channel(1));
+		auto playerc = player.Create(Track(1), Patch(0));
 		playerc.Sleep(DeTime(500));
 		
 		while (!play_end) {
-			playerc.PlayPitch(Pitch(PitchBase(5), Scale(3)), DeTime(500));
+			playerc.PlayPitch(Pitch(Note(5), Octave(3)), DeTime(500));
 		}
 		});
 
