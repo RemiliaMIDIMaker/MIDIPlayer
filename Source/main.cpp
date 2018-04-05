@@ -47,7 +47,7 @@ int main(int argc, const char *argv[])
 	Player player;
 
 	bool play_end = false;
-
+	Test();
 	std::thread t1([&]() {
 		auto playerc = player.Create(Track(0));
 		playerc.PlayPitch(Note("C"), DeTime(500));
