@@ -21,9 +21,11 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp" />
     <ClCompile Include="..\..\Source\midiplayer.cpp" />
+    <ClCompile Include="..\..\Source\parse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\midiplayer.h" />
+    <ClInclude Include="..\..\Source\parse.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\Source\Patch.txt" />

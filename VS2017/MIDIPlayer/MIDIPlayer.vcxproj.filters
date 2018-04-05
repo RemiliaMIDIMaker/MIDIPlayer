@@ -21,9 +21,15 @@
     <ClCompile Include="..\..\Source\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\parse.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\midiplayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\parse.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
