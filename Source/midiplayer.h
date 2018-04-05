@@ -57,9 +57,9 @@ namespace MIDIPlayer
 		}
 		explicit Note(const char *word) { // X bX #X
 			if (word[0] == 'b' || word[0] == '#')
-				this->Note::Note(NoteBase(word[1]), KeySignature(word[0]));
+				this->data = Note(NoteBase(word[1]), KeySignature(word[0])).data;
 			else
-				this->Note::Note(NoteBase(word[0]));
+				this->data = Note(NoteBase(word[0])).data;
 		}
 		uint8_t data;
 	};
