@@ -69,7 +69,7 @@ void Test2_Base(MIDIPlayer::Pitch base) {
 			word[x] = '\0';
 
 			{
-				Notation notation(NotationBase(i, false), NotationOctave(o));
+				Notation notation(NotationBase(i, true), NotationOctave(o));
 				Notation notation_p = parseNumberedNotation(word, end);
 				assert(notation.base.data == notation_p.base.data);
 				assert(notation.octave.data == notation_p.octave.data);
