@@ -56,3 +56,8 @@ MIDIPlayer::Pitch parsePitch(const char *word, const char *&end) {
 	end = &word[++i];
 	return MIDIPlayer::Pitch(MIDIPlayer::Note(word), MIDIPlayer::Octave(num));
 }
+
+MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end)
+{
+	return MIDIPlayer::Notation();
+}

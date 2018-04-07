@@ -3,7 +3,7 @@
 #include <thread>
 #include <vector>
 
-void Test() {
+void Test1() {
 	using namespace MIDIPlayer;
 
 	char s;
@@ -40,41 +40,96 @@ void Test() {
 	}
 }
 
+void Test2_Base(MIDIPlayer::Pitch base) {
+	using namespace MIDIPlayer;
+	char word[0x10] = "";
+
+	for (int o = -11; o <= 10; o++) {
+		for (int i = 1; i <= 7; i++) {
+			bool success = true;
+			const char *end;
+
+			int x = 0;
+			int count = o > 0 ? o : -o;
+			while (count--)
+				word[x++] = (o > 0 ? '+' : '-');
+			word[x++] = i + '0';
+			word[x] = '\0';
+
+			{
+				Notation notation(NotationBase(i, false), NotationOctave(o));
+				Notation notation_p = parseNumberedNotation(word, end);
+				assert(notation.base.data == notation_p.base.data);
+				assert(notation.octave.data == notation_p.octave.data);
+				assert(end == word + o + 1);
+				printf("%s\n", word);
+			}
+
+			word[x++] = '#';
+			word[x] = '\0';
+
+			{
+				Notation notation(NotationBase(i, false), NotationOctave(o));
+				Notation notation_p = parseNumberedNotation(word, end);
+				assert(notation.base.data == notation_p.base.data);
+				assert(notation.octave.data == notation_p.octave.data);
+				assert(end == word + o + 2);
+				printf("%s\n", word);
+			}
+		}
+	}
+}
+
+void Test2()
+{
+	using namespace MIDIPlayer;
+	Pitch base(Note("C"), Octave(-1));
+
+	Test2_Base(base);
+}
+
 int main(int argc, const char *argv[])
 {
 	using namespace MIDIPlayer;
 
+	Test1();
+	Test2();
+
 	Player player;
 
 	bool play_end = false;
-	Test();
 	std::thread t1([&]() {
 		auto playerc = player.Create(Track(0));
-		playerc.PlayPitch(Note("C"), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase('C')), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase(3)), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase(5)), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase(5)), DeTime(1000));
 
-		Pitch vecs[] { Note(NoteBase(1)), Note(NoteBase(3)), Note(NoteBase(5)) };
-		//playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
-		playerc.PlayPitch(Note(NoteBase(5)), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase(5)), DeTime(1000));
-		playerc.PlayPitch(Note(NoteBase(3)), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase(3)), DeTime(1000));
-		//playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
+		Pitch base(Note("C"));
 
-		playerc.PlayPitch(Note(NoteBase(1)), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase(1)), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase(3)), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase(5)), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase(5)), DeTime(1000));
+		Notation not1(NotationBase(1, false), NotationOctave(0));
+		Notation not2(NotationBase(2, false), NotationOctave(0));
+		Notation not3(NotationBase(3, false), NotationOctave(0));
+		Notation not4(NotationBase(4, false), NotationOctave(0));
+		Notation not5(NotationBase(5, false), NotationOctave(0));
 
-		//playerc.PlayPitchs(std::begin(vecs), std::end(vecs), DeTime(1000));
-		playerc.PlayPitch(Note(NoteBase(5)), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase(5)), DeTime(1000));
-		playerc.PlayPitch(Note(NoteBase(4)), DeTime(500));
-		playerc.PlayPitch(Note(NoteBase(4)), DeTime(1000));
+		playerc.PlayPitch(Pitch(not1, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not1, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not3, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not5, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not5, base), DeTime(1000));
+
+		playerc.PlayPitch(Pitch(not5, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not5, base), DeTime(1000));
+		playerc.PlayPitch(Pitch(not3, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not3, base), DeTime(1000));
+
+		playerc.PlayPitch(Pitch(not1, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not1, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not3, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not5, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not5, base), DeTime(1000));
+
+		playerc.PlayPitch(Pitch(not5, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not5, base), DeTime(1000));
+		playerc.PlayPitch(Pitch(not4, base), DeTime(500));
+		playerc.PlayPitch(Pitch(not4, base), DeTime(1000));
 
 		play_end = true;
 		});
@@ -84,7 +139,7 @@ int main(int argc, const char *argv[])
 		playerc.Sleep(DeTime(500));
 
 		while (!play_end) {
-			playerc.PlayPitch(Pitch(Note(NoteBase(5)), Octave(3)), DeTime(500));
+			//playerc.PlayPitch(Pitch(Note(NoteBase(5)), Octave(3)), DeTime(500));
 		}
 		});
 

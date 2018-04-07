@@ -30,6 +30,7 @@
   <ItemGroup>
     <Text Include="..\..\Source\Patch.txt" />
     <Text Include="..\..\Source\Pitch.txt" />
+    <Text Include="NumberedNotation.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

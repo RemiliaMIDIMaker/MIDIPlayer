@@ -6,37 +6,36 @@
 
 namespace MIDIPlayer
 {
-	struct Volume {
-		explicit Volume(uint8_t data = 0) : data(data) { assert(data <= 0x7f); }
-		uint8_t data;
-	};
-	struct Track {
-		explicit Track(uint8_t data = 0) : data(data) { assert(data <= 0xf); }
-		uint8_t data;
-	};
-	struct Patch {
-		explicit Patch(uint8_t data = 0) : data(data) { assert(data <= 0x7f); }
-		uint8_t data;
-	};
+	// Pitchs
+	// * Note
+	//     NoteBase + KeySignature -> Note
+	//     Note + Octave -> Picth
+	// * Notation
+	//     Notation + Pitch(Note + Octave) -> Picth
+
 	struct NoteBase { // 7 notes
-		explicit NoteBase(uint8_t data = 0) : data(data) {
+		// * 'C' 'D' 'E' 'F' 'G' 'A' 'B' 
+		// *  1   2   3   4   5   6   7
+		explicit NoteBase(uint8_t data = 0) {
 			if ('A' <= data && data <= 'G') {
 				if (data < 'C')
 					this->data = (data - 'A') + 6;
 				else
 					this->data = (data - 'C') + 1;
 			}
-			else if ('1' <= data && data <= '7') {
-				this->data = data - '1' + 1;
+			else if (1 <= data && data <= 7) {
+				this->data = data;
 			}
-			else if (!(1 <= data && data <= 7)) {
+			else {
 				assert(false);
 			}
 		}
 		uint8_t data;
 	};
 	struct KeySignature {
-		explicit KeySignature(uint8_t data = 0) : data(data) {
+		// * '\0' '#' 'b'
+		// *   0   1  -1
+		explicit KeySignature(int8_t data = 0) : data(data) {
 			if (data == '#')
 				this->data = +1;
 			else if (data == 'b')
@@ -46,18 +45,20 @@ namespace MIDIPlayer
 			else
 				assert(false);
 		}
-		uint8_t data;
+		int8_t data;
 	};
 	struct Note { // 12 + 2 notes (0 1 ~ 12 13) bC(-B) C #C(bD) D #D(bE) E(bF) F(#E) #F(bG) G #G(bA) A #A(bB) B #B(+C)
-		explicit Note(uint8_t data) /* 0 ~ 11 : C ~ B */ : data(data) { assert(data < 12); this->data += 1; }
+		explicit Note(uint8_t data) /* 0 ~ 11 : C ~ B */ : data(data + 1) { assert(data < 12); }
 		explicit Note(NoteBase notebase) : Note(notebase, KeySignature()) {}
 		explicit Note(NoteBase notebase, KeySignature keysignature) {
-			static const uint8_t table[] = { 1, 3, 5, 6, 8, 10, 12 };
+			static const int8_t table[] = { 1, 3, 5, 6, 8, 10, 12 };
 			this->data = table[notebase.data - 1] + keysignature.data;
 		}
-		explicit Note(const char *word) { // X bX #X
+		explicit Note(const char *word) { // X bX #X Xb X#
 			if (word[0] == 'b' || word[0] == '#')
 				this->data = Note(NoteBase(word[1]), KeySignature(word[0])).data;
+			else if (word[1] == 'b' || word[1] == '#')
+				this->data = Note(NoteBase(word[0]), KeySignature(word[1])).data;
 			else
 				this->data = Note(NoteBase(word[0])).data;
 		}
@@ -68,6 +69,23 @@ namespace MIDIPlayer
 		explicit Octave(int8_t data = default_octave) : data(data) { assert(-1 <= data && data <= 9); }
 		int8_t data;
 	};
+
+	struct NotationBase { // 0, 1 ~ 14; (1 ~ 7, true/false)
+		explicit NotationBase() : data(0) {}
+		explicit NotationBase(uint8_t data, bool rise) : data((data * 2 - 1) + (rise ?  1 : 0)) { assert(1 <= data && data <= 7); }
+		uint8_t data;
+	};
+	struct NotationOctave { // -11 ~ 10
+		explicit NotationOctave(int8_t data = 0) : data(data) { assert(-11 <= data && data <= 10); }
+		int8_t data;
+	};
+	struct Notation {
+		explicit Notation() {}
+		explicit Notation(NotationBase base, NotationOctave octave) : base(base), octave(octave) {}
+		NotationBase base;
+		NotationOctave octave;
+	};
+
 	struct Pitch {
 		explicit Pitch(uint8_t data) : data(data) { assert(data <= 0x7f); }
 		Pitch(Note note) : Pitch(note, Octave()) {}
@@ -78,6 +96,37 @@ namespace MIDIPlayer
 			this->data = note.data + 0xc - 1 + octave.data * 0xc;
 			assert(this->data <= 0x7f);
 		}
+		Pitch(Notation notation, Note note, Octave octave) : Pitch(notation, Pitch(note, octave)) {}
+		Pitch(Notation notation, Pitch pitch) {
+			bool success;
+			Pitch p = pitch.offset(notation, success);
+			assert(success);
+			this->data = p.data;
+		}
+		uint8_t data;
+
+		// if 1 = C4 then 1# = #C4, 2 = D4, 2# = #D4 ...
+		// Notice : 3# == 4, 7# == +1, whatever 1 = what.
+		Pitch offset(Notation notation, bool &success) const {
+			assert(notation.base.data != 0);
+			static const int8_t table[] = { 0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 11, 12 };
+			int offset = table[notation.base.data - 1] + 0xc * notation.octave.data;
+			int ndata = this->data + offset;
+			success = (0 <= ndata && ndata <= 0x7f);
+			return (success) ? Pitch(ndata) : Pitch(0);
+		}
+	};
+
+	struct Volume {
+		explicit Volume(uint8_t data = 0) : data(data) { assert(data <= 0x7f); }
+		uint8_t data;
+	};
+	struct Track {
+		explicit Track(uint8_t data = 0) : data(data) { assert(data <= 0xf); }
+		uint8_t data;
+	};
+	struct Patch {
+		explicit Patch(uint8_t data = 0) : data(data) { assert(data <= 0x7f); }
 		uint8_t data;
 	};
 	struct DeTime {
