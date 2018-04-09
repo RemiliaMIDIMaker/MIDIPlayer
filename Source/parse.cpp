@@ -57,16 +57,12 @@ MIDIPlayer::Pitch parsePitch(const char *word, const char *&end) {
 	return MIDIPlayer::Pitch(MIDIPlayer::Note(word), MIDIPlayer::Octave(num));
 }
 
-MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end)
-{
-	size_t len = strlen(word);
+MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end){
 	int base = 0;
 	int octave = 0;
 	int i = 0;
 	bool rise;
-	for (i = 0;i < len;++i) {
-		if (word[i] == '-' || word[i] == '+' || word[i] <= '7' && word[i] >= '1')
-		{
+		while (word[i] == '-' || word[i] == '+' || word[i] <= '7' && word[i] >= '1'){
 			if (word[i] == '-') {//if the first character is - 
 				if (word[0] == '-')//if this character is -
 					octave--;
@@ -87,22 +83,16 @@ MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end)
 			}
 			else {
 				base = word[i] - '0';
-				if (i < len - 1 && word[i + 1] == '#')
+				if (word[i + 1] == '#')
 					rise = true;
 				else
 					rise = false;
 				break;
 			}
-
+			i++;
 		}
-		else {
-			printf("Illegal operation.The are wrong characters that out of the range.\n");
-			end = word;
-			return MIDIPlayer::Notation();
-		}
-	}
 	if (!base) {
-		printf("Illegal operation.There are no base number in this string.\n");
+		printf("Illegal operation.There are no base number in this string or there are wrong characters in it\n");
 		end = word;
 		return MIDIPlayer::Notation();
 	}
