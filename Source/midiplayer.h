@@ -76,7 +76,7 @@ namespace MIDIPlayer
 		uint8_t data;
 	};
 	struct NotationOctave { // -11 ~ 10
-		explicit NotationOctave(int8_t data = 0) : data(data) { assert(-11 <= data && data <= 10); }
+		explicit NotationOctave(int8_t data = 0) : data(data) {}
 		int8_t data;
 	};
 	struct Notation {
