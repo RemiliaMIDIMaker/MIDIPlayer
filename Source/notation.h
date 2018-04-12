@@ -19,18 +19,23 @@ namespace MIDIPlayer
 		NotationOctave octave;
 	};
 
-	struct Beat {
-		// 1---  : 4   beats : 32
-		// 1-    : 2   beats : 16
-		// 1     : 1   beat  : 8
-		// 1/    : 1/2 beat  : 4
-		// 1//   : 1/4 beat  : 2
-		// 1///  : 1/8 beat  : 1
-		// 1.    : 1 + 1/2   : 8 + 4 = 12
-		// 1/.   : 1/2 + 1/4 : 4 + 2 = 6
+	struct NoteValue {
+		// 1---    : 1     note : 256
+		// 1-      : 1/2   note : 128
+		// 1       : 1/4   note : 64
+		// 1/      : 1/8   note : 32
+		// 1//     : 1/16  note : 16
+		// 1///    : 1/32  note : 8
+		// 1////   : 1/64  note : 4
+		// 1/////  : 1/128 note : 2
+		// 1////// : 1/256 note : 1
 
-		explicit Beat(uint8_t data) : data(data) { assert(data != 0); }
-		uint8_t data;
+		// 1.     : 1/4 + 1/8    : 64 + 32 = 96
+		// 1/.    : 1/8 + 1/16   : 32 + 16 = 48
+		// 1---.. : 1 + 1/2 + 1/4 : 256 + 128 + 64 = 448 = 7 * 64 : 1-------
+
+		explicit NoteValue(uint16_t data) : data(data) { assert(data != 0); }
+		uint16_t data;
 	};
 
 	// if 1 = C4 then 1# = #C4, 2 = D4, 2# = #D4 ...

@@ -101,6 +101,6 @@ MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end) {
 	return MIDIPlayer::Notation(MIDIPlayer::NotationBase(base, rise), MIDIPlayer::NotationOctave(octave));
 }
 
-MIDIPlayer::Beat parseBeat(const char *word, const char *&end) {
-	return MIDIPlayer::Beat(0);
+MIDIPlayer::NoteValue parseNoteValue(const char *word, const char *&end) {
+	return MIDIPlayer::NoteValue(0);
 }
