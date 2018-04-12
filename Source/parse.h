@@ -7,3 +7,6 @@ MIDIPlayer::Pitch parsePitch(const char *word, const char *&end);
 
 // Example : 1 2# +1 --1
 MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end);
+
+// Example : -- // //.
+MIDIPlayer::Beat parseBeat(const char *word, const char *&end);

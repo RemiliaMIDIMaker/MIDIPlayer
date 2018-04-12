@@ -83,20 +83,6 @@ namespace MIDIPlayer
 		uint8_t data;
 	};
 
-	struct Beat {
-		// 1---  : 4   beats : 32
-		// 1-    : 2   beats : 16
-		// 1     : 1   beat  : 8
-		// 1/    : 1/2 beat  : 4
-		// 1//   : 1/4 beat  : 2
-		// 1///  : 1/8 beat  : 1
-		// 1.    : 1 + 1/2   : 8 + 4 = 12
-		// 1/.   : 1/2 + 1/4 : 4 + 2 = 6
-
-		explicit Beat(uint8_t data) : data(data) { assert(data != 0); }
-		uint8_t data;
-	};
-
 	struct Volume {
 		explicit Volume(uint8_t data = 0) : data(data) { assert(data <= 0x7f); }
 		uint8_t data;

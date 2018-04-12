@@ -100,3 +100,7 @@ MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end) {
 	end = &word[octave + 1 + rise];
 	return MIDIPlayer::Notation(MIDIPlayer::NotationBase(base, rise), MIDIPlayer::NotationOctave(octave));
 }
+
+MIDIPlayer::Beat parseBeat(const char *word, const char *&end) {
+	return MIDIPlayer::Beat(0);
+}
