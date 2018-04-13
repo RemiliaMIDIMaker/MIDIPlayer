@@ -13,3 +13,7 @@ Open ./VS2017/MIDIPlayer.sln
 cd ./MinGW
 call build
 ```
+
+### License
+
+MIT
