@@ -21,16 +21,21 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp" />
     <ClCompile Include="..\..\Source\midiplayer.cpp" />
+    <ClCompile Include="..\..\Source\notation.cpp" />
     <ClCompile Include="..\..\Source\parse.cpp" />
+    <ClCompile Include="..\..\Source\test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\midiplayer.h" />
+    <ClInclude Include="..\..\Source\notation.h" />
     <ClInclude Include="..\..\Source\parse.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\Source\Patch.txt" />
-    <Text Include="..\..\Source\Pitch.txt" />
-    <Text Include="NumberedNotation.txt" />
+    <Image Include="..\..\Resource\numberednotation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Resource\Patch.txt" />
+    <Text Include="..\..\Resource\Pitch.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

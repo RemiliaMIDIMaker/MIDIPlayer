@@ -24,6 +24,12 @@
     <ClCompile Include="..\..\Source\parse.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\notation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\midiplayer.h">
@@ -32,15 +38,20 @@
     <ClInclude Include="..\..\Source\parse.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\notation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\Source\Patch.txt">
+    <Image Include="..\..\Resource\numberednotation.png">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Resource\Patch.txt">
       <Filter>资源文件</Filter>
     </Text>
-    <Text Include="..\..\Source\Pitch.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="NumberedNotation.txt">
+    <Text Include="..\..\Resource\Pitch.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>

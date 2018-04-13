@@ -57,40 +57,40 @@ MIDIPlayer::Pitch parsePitch(const char *word, const char *&end) {
 	return MIDIPlayer::Pitch(MIDIPlayer::Note(word), MIDIPlayer::Octave(num));
 }
 
-MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end){
+MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end) {
 	int base = 0;
 	int octave = 0;
 	int i = 0;
 	bool rise;
-		while (word[i] == '-' || word[i] == '+' || word[i] <= '7' && word[i] >= '1'){
-			if (word[i] == '-') {//if the first character is - 
-				if (word[0] == '-')//if this character is -
-					octave--;
-				else {//if it is not ' either number of range
-					printf("Illegal operation.The are wrong characters when first character is '-'.\n");
-					end = word;
-					return MIDIPlayer::Notation();
-				}
+	while (word[i] == '-' || word[i] == '+' || word[i] <= '7' && word[i] >= '1') {
+		if (word[i] == '-') {//if the first character is - 
+			if (word[0] == '-')//if this character is -
+				octave--;
+			else {//if it is not ' either number of range
+				printf("Illegal operation.The are wrong characters when first character is '-'.\n");
+				end = word;
+				return MIDIPlayer::Notation();
 			}
-			else if (word[i] == '+') {
-				if (word[0] == '+')//if this character is +
-					octave++;
-				else {//if it is not ' either number of range
-					printf("Illegal operation.The are wrong characters when first character is '+'.\n");
-					end = word;
-					return MIDIPlayer::Notation();
-				}
-			}
-			else {
-				base = word[i] - '0';
-				if (word[i + 1] == '#')
-					rise = true;
-				else
-					rise = false;
-				break;
-			}
-			i++;
 		}
+		else if (word[i] == '+') {
+			if (word[0] == '+')//if this character is +
+				octave++;
+			else {//if it is not ' either number of range
+				printf("Illegal operation.The are wrong characters when first character is '+'.\n");
+				end = word;
+				return MIDIPlayer::Notation();
+			}
+		}
+		else {
+			base = word[i] - '0';
+			if (word[i + 1] == '#')
+				rise = true;
+			else
+				rise = false;
+			break;
+		}
+		i++;
+	}
 	if (!base) {
 		printf("Illegal operation.There are no base number in this string or there are wrong characters in it\n");
 		end = word;
@@ -101,3 +101,6 @@ MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end){
 	return MIDIPlayer::Notation(MIDIPlayer::NotationBase(base, rise), MIDIPlayer::NotationOctave(octave));
 }
 
+MIDIPlayer::NoteValue parseNoteValue(const char *word, const char *&end) {
+	return MIDIPlayer::NoteValue(0);
+}
