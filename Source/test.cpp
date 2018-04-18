@@ -85,8 +85,22 @@ static void Test2()
 	Test2_Base(base);
 }
 
+static void Test3()
+{
+	char buffer[0xff] = "";
+	const char *end;
+
+	while (true) {
+		printf(">");
+		scanf("%s", buffer);
+		auto v = parseNoteValueX(buffer, end);
+		printf("%d %lld\n", v.data, end - buffer);
+	}
+}
+
 void Test()
 {
-	Test1();
-	Test2();
+	//Test1();
+	//Test2();
+	//Test3();
 }

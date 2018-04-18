@@ -13,7 +13,7 @@ int main(int argc, const char *argv[])
 	using namespace MIDIPlayer;
 
 #ifndef NDEBUG
-	//Test();
+	Test();
 #endif
 
 	Player player;

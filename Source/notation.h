@@ -34,9 +34,20 @@ namespace MIDIPlayer
 		// 1/.    : 1/8 + 1/16   : 32 + 16 = 48
 		// 1---.. : 1 + 1/2 + 1/4 : 256 + 128 + 64 = 448 = 7 * 64 : 1-------
 
-		explicit NoteValue(uint16_t data) : data(data) { assert(data != 0); }
-		constexpr static uint16_t WholeNote = 256;
-		uint16_t data;
+		using Type = uint16_t;
+		constexpr static Type WholeNote = 256;
+
+		explicit NoteValue(Type data) : data(data) { /*assert(data != 0);*/ }
+
+		NoteValue& operator+=(const NoteValue &nv) {
+			*this = *this + nv;
+			return *this;
+		}
+		NoteValue operator+(const NoteValue &nv) const {
+			assert(data + nv.data <= std::numeric_limits<Type>::max());
+			return NoteValue(data + nv.data);
+		}
+		Type data;
 	};
 
 	// if 1 = C4 then 1# = #C4, 2 = D4, 2# = #D4 ...

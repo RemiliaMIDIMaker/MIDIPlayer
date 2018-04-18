@@ -10,3 +10,6 @@ MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end);
 
 // Example : -- // //.
 MIDIPlayer::NoteValue parseNoteValue(const char *word, const char *&end);
+
+// Example : --&--  //.--&/.-
+MIDIPlayer::NoteValue parseNoteValueX(const char *word, const char *&end);
