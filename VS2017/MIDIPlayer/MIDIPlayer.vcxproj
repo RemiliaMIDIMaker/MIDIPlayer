@@ -31,11 +31,11 @@
     <ClInclude Include="..\..\Source\parse.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\Resource\numberednotation.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="..\..\Resource\Patch.txt" />
     <Text Include="..\..\Resource\Pitch.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Resource\numberednotation.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
