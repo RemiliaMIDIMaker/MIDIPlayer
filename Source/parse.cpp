@@ -101,6 +101,37 @@ MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end) {
 	return MIDIPlayer::Notation(MIDIPlayer::NotationBase(base, rise), MIDIPlayer::NotationOctave(octave));
 }
 
+
+
 MIDIPlayer::NoteValue parseNoteValue(const char *word, const char *&end) {
-	return MIDIPlayer::NoteValue(0);
+	uint32_t sum = MIDIPlayer::NoteValue::WholeNote / 4;
+	int i = 1;
+	while (word[i] == '/' || word[i] == '.' || word[i] == '-') {
+		while (word[i] == '/') {
+			sum /= 2;
+			i++;
+		}
+		int add = sum / 2;
+		while (word[i] == '.') {
+			sum += add;
+			add /= 2;
+			i++;
+		}
+		while (word[i] == '-') {
+			sum += MIDIPlayer::NoteValue::WholeNote / 4;
+			i++;
+		}
+	}
+	end = &word[i];
+	if (!sum) {
+		printf("Illegal Operation!The notevalue is too small.\n");
+		return MIDIPlayer::NoteValue(0);
+	}
+	else if (sum > std::numeric_limits<uint16_t>::max()) {
+		printf("Illegal Operation!The notevalue is too big.\n");
+		return MIDIPlayer::NoteValue(0);
+	}
+	else
+		return MIDIPlayer::NoteValue(static_cast<uint16_t>(sum));
 }
+
