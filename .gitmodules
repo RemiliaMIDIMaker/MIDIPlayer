@@ -1,3 +1,6 @@
 [submodule "ThirdLibrary/portmidi"]
 	path = ThirdLibrary/portmidi
 	url = https://github.com/RemiliaMIDIMaker/portmidi
+[submodule "ThirdLibrary/portsmf"]
+	path = ThirdLibrary/portsmf
+	url = https://github.com/RemiliaMIDIMaker/portsmf
