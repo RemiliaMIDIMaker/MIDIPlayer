@@ -5,6 +5,8 @@
 
 namespace MIDIPlayer
 {
+	// Player::MIDIDevice
+
 	static PortMidiStream*& getMIDIDevice(void* &data) {
 		return reinterpret_cast<PortMidiStream*&>(data);
 	}
@@ -22,6 +24,25 @@ namespace MIDIPlayer
 	}
 	void*& Player::MIDIDevice::get() {
 		return data;
+	}
+
+	// Player
+
+	static size_t PmUsageCounter = 0;
+
+	Player::Player() {
+		Pm_Initialize();
+		PmUsageCounter++;
+	}
+	Player::Player(const Player &) {
+		PmUsageCounter++;
+	}
+
+	Player::~Player() {
+		PmUsageCounter--;
+		if (PmUsageCounter == 0) {
+			Pm_Terminate();
+		}
 	}
 
 	static void _Pm_WriteShort(PortMidiStream *stream, PmMessage message) {

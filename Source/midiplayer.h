@@ -178,8 +178,10 @@ namespace MIDIPlayer
 		};
 
 	public:
-		Player() = default;
-		Player(const Player &) = default;
+		Player();
+		Player(const Player &);
+
+		~Player();
 
 		void PlayPitch(Pitch pitch, Volume volume, Track track) {
 			PlayPitch(midi_device, pitch, volume, track);
