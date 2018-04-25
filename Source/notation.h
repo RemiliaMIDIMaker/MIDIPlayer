@@ -1,5 +1,6 @@
 #pragma once
 #include "midiplayer.h"
+#include <limits>
 
 namespace MIDIPlayer
 {

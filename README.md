@@ -3,17 +3,35 @@ The MIDI Player with Text and Binary File
 
 ## Build
 
-### Visual Studio 2017
+### Windows
+
+#### Visual Studio 2017
 
 Open ./VS2017/MIDIPlayer.sln
 
-### MinGW
+#### MinGW or Other
+
+Require CMake
 
 ```
-cd ./MinGW
-call build
+mkdir build
+cd build
+cmake ..
+make
 ```
 
-### License
+### Linux
+
+Require CMake, Alsa
+
+```
+mkdir build
+cd build
+cmake ..
+make
+```
+
+
+## License
 
 MIT
