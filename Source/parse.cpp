@@ -101,7 +101,7 @@ MIDIPlayer::Notation parseNumberedNotation(const char *word, const char *&end) {
 	return MIDIPlayer::Notation(MIDIPlayer::NotationBase(base, rise), MIDIPlayer::NotationOctave(octave));
 }
 
-MIDIPlayer::NoteValue parseNoteValue(const char *word, const char *&end) {
+MIDIPlayer::NoteValue parseNoteValueBase(const char *word, const char *&end) {
 	uint32_t sum = MIDIPlayer::NoteValue::WholeNote / 4;
 	int i = 0;
 	while (word[i] == '/' || word[i] == '.' || word[i] == '-') {
@@ -134,15 +134,15 @@ MIDIPlayer::NoteValue parseNoteValue(const char *word, const char *&end) {
 	}
 }
 
-MIDIPlayer::NoteValue parseNoteValueX(const char *word, const char *&end) {
+MIDIPlayer::NoteValue parseNoteValue(const char *word, const char *&end) {
 	MIDIPlayer::NoteValue sum(0);
-	sum = parseNoteValue(word, end);
+	sum = parseNoteValueBase(word, end);
 	if (end == word) {
 		return sum;
 	}
 	while (*end == '&') {
 		const char *f = end + 1;
-		auto r = parseNoteValue(end + 1, end);
+		auto r = parseNoteValueBase(end + 1, end);
 		if (f == end) {
 			end = f - 1;
 			break;

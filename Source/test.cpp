@@ -93,7 +93,7 @@ static void Test3()
 	while (true) {
 		printf(">");
 		scanf("%s", buffer);
-		auto v = parseNoteValueX(buffer, end);
+		auto v = parseNoteValue(buffer, end);
 		printf("%d %lld\n", v.data, end - buffer);
 	}
 }
